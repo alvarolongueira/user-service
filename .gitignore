@@ -1,0 +1,14 @@
+## IntelliJ
+.idea/
+*.iml
+
+## Build
+**/target/
+/workspace/
+
+## VSCode
+.project
+.settings
+
+#DS_Store
+.DS_Store
