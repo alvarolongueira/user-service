@@ -20,6 +20,10 @@
     <dependencies>
         <dependency>
             <groupId>com.alvarolongueira.user.service</groupId>
+            <artifactId>user-service-infrastructure-rest-api-spec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alvarolongueira.user.service</groupId>
             <artifactId>user-service-domain</artifactId>
         </dependency>
         <dependency>

@@ -1,16 +1,23 @@
 # TODO
 
-crear open api
-generar api java desde spec
+validar blank spaces
 generar eventos de kafka
 meter version en la entity
 validar que no se adelantan modificaciones (version? synchronized?)
 
 get all con paginacion
+validar campos nulos
+validar duplicados de mail?
+logs
+healthcheck
 test unitarios
 test integracion
+update readme
 
-ofuscar password
+update postman collection
+ofuscar password https://docs.spring.io/spring-xd/docs/current/api/org/springframework/xd/dirt/rest/PasswordUtils.html
+
+jacoco-report test coverage
 crear usuario por grpc
 
 
@@ -42,3 +49,10 @@ The service must:
 ● Have meaningful logs
 ● Have a health check
 ● Be well documented
+
+--
+Please also provide a README.md that contains:
+● Instructions to start the application on localhost (dockerised applications are preferred)
+● An explanation of the choices taken and assumptions made during development
+● Possible extensions or improvements to the service (focusing on scalability and deployment to production)
+We expect to be able to run the tests, build the application and run it locally.

@@ -9,8 +9,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.util.Assert;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -29,7 +27,6 @@ public class JsonUtils {
      * from object to use as stubs when is necessary use wiremock.
      */
     public String toJson(Object object) {
-        Assert.notNull(object, "parameter must not be null");
         try {
             return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
@@ -40,8 +37,6 @@ public class JsonUtils {
 
     /** Method responsible to convert json into Object. All parameters are required */
     public <T> T toObject(String json, Class<T> clazz) {
-        Assert.hasText(json, "parameter must not be null or empty");
-        Assert.notNull(clazz, "parameter clazz must not be null");
         try {
             return objectMapper.readValue(json, clazz);
         } catch (JsonProcessingException e) {
@@ -51,8 +46,6 @@ public class JsonUtils {
     }
 
     public <T> List<T> toListOfObject(String json, Class<T> clazz) {
-        Assert.hasText(json, "parameter must not be null or empty");
-        Assert.notNull(clazz, "parameter clazz must not be null");
         try {
             return objectMapper.readValue(
                     json, objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
