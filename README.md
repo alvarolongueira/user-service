@@ -1,5 +1,7 @@
 # TODO
 
+classpath:/db/changelog/db.changelog-master.yaml does not exist
+
 validar blank spaces
 generar eventos de kafka
 meter version en la entity

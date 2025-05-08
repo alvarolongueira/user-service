@@ -3,7 +3,7 @@ package com.alvarolongueira.user.service.rest.api;
 import com.alvarolongueira.user.service.domain.entity.User;
 import com.alvarolongueira.user.service.domain.service.CreateUserUseCase;
 import com.alvarolongueira.user.service.rest.api.handler.UseCaseHandler;
-import com.alvarolongueira.user.service.rest.api.mapper.DomainMapper;
+import com.alvarolongueira.user.service.rest.api.mapper.RestApiMapper;
 import com.alvarolongueira.user.service.rest.api.model.CreateUser201Response;
 import com.alvarolongueira.user.service.rest.api.model.CreateUserRequest;
 
@@ -16,16 +16,15 @@ import org.springframework.http.ResponseEntity;
 @AllArgsConstructor
 public class UserController implements UserApi {
 
-    private DomainMapper domainMapper;
+    private RestApiMapper mapper;
     private UseCaseHandler useCaseHandler;
     private CreateUserUseCase createUserUseCase;
 
     @Override
     public ResponseEntity<CreateUser201Response> createUser(CreateUserRequest createUserRequest)
             throws Exception {
-        CreateUserUseCase.RequestUseCase request =
-                domainMapper.toCreateUserRequest(createUserRequest);
+        CreateUserUseCase.RequestUseCase request = mapper.toCreateUserRequest(createUserRequest);
         User user = useCaseHandler.handle(createUserUseCase, request);
-        return ResponseEntity.ok(domainMapper.toResponse(user));
+        return ResponseEntity.ok(mapper.toResponse(user));
     }
 }

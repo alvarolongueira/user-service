@@ -8,7 +8,7 @@ import com.alvarolongueira.user.service.rest.api.model.CreateUserRequest;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface DomainMapper {
+public interface RestApiMapper {
 
     CreateUserUseCase.RequestUseCase toCreateUserRequest(CreateUserRequest createUserRequest);
 

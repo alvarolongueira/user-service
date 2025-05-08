@@ -11,6 +11,8 @@ import lombok.ToString;
 
 import org.springframework.lang.Nullable;
 
+import java.time.OffsetDateTime;
+
 @Getter
 @Builder(toBuilder = true)
 @AllArgsConstructor
@@ -19,13 +21,15 @@ import org.springframework.lang.Nullable;
 @ToString
 public class User {
 
-    @Nullable String id;
-    @Nullable String firstName;
-    @Nullable String lastName;
-    String nickname;
-    @Nullable String password;
-    String email;
-    @Nullable String country;
+    @Nullable private String id;
+    @Nullable private String firstName;
+    @Nullable private String lastName;
+    private String nickname;
+    @Nullable private String password;
+    private String email;
+    @Nullable private String country;
+    @Nullable private OffsetDateTime createdAt;
+    @Nullable private OffsetDateTime updatedAt;
 
     public User withId(@NotNull String id) {
         return this.toBuilder().id(id).build();

@@ -1,0 +1,19 @@
+databaseChangeLog:
+  -  changeSet:
+       id: add-non-null-constraint
+       author: alvaro-longueira
+       changes:
+        -  addNotNullConstraint:
+             schemaName: public
+             tableName: user_table
+             columnName: nickname
+             constraintName: notnull_nickname
+             defaultNullValue: default_nickname
+             validate: true
+        - addNotNullConstraint:
+            schemaName: public
+            tableName: user_table
+            columnName: email
+            constraintName: notnull_email
+            defaultNullValue: default_email
+            validate: true
