@@ -57,7 +57,17 @@ paths:
         $ref: '#/components/requestBodies/UserRequest'
       responses:
         '201':
-          $ref: '#/components/responses/UserResponse'
+          description: Unique identifier of the user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                x-examples:
+                  Example 1:
+                    id: b11cfa25-530d-44a2-b40e-43b5321310b5
         '400':
           description: Bad Request
       x-stoplight:

@@ -20,7 +20,7 @@ public class CreateUserUseCaseImpl implements CreateUserUseCase {
     public User process(RequestUseCase request) {
         User user = mapper.fromCreateRequest(request);
         // TODO validate
-        outputPort.findUser("id");
-        return null;
+        // TODO duplicates
+        return outputPort.createUser(user);
     }
 }

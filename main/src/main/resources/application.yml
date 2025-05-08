@@ -18,11 +18,10 @@ spring:
     init:
       mode: always
   jpa:
-    show-sql: true
+    show-sql: false
   liquibase:
     enabled: true
   datasource:
-    driverClassName: org.postgresql.Driver
     url: "jdbc:postgresql://localhost:5432/application_database"
     username: database-user
     password: database-pass
@@ -32,19 +31,11 @@ management:
   security:
     enabled: false
   context-path: /
-  metrics:
-    distribution:
-      percentiles-histogram:
-        http:
-          server:
-            requests: true
   endpoints:
     web:
       exposure:
         include: health, info
       base-path: /
-      path-mapping:
-        prometheus: metrics
   endpoint:
     health:
       probes:

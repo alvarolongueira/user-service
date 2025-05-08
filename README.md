@@ -1,20 +1,18 @@
 # TODO
 
-classpath:/db/changelog/db.changelog-master.yaml does not exist
-
-validar blank spaces
 generar eventos de kafka
-meter version en la entity
 validar que no se adelantan modificaciones (version? synchronized?)
 
 get all con paginacion
+
+validar blank spaces
 validar campos nulos
 validar duplicados de mail?
+
 logs
-healthcheck
+
 test unitarios
 test integracion
-update readme
 
 update postman collection
 ofuscar password https://docs.spring.io/spring-xd/docs/current/api/org/springframework/xd/dirt/rest/PasswordUtils.html
@@ -22,6 +20,12 @@ ofuscar password https://docs.spring.io/spring-xd/docs/current/api/org/springfra
 jacoco-report test coverage
 crear usuario por grpc
 
+update readme
+    * open api spec
+    * liquibase y pos
+    * kafka
+    * postman
+    * docker
 
 -----
 ```

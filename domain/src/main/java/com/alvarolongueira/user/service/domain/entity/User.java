@@ -1,5 +1,6 @@
 package com.alvarolongueira.user.service.domain.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -8,8 +9,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
-import org.springframework.lang.Nullable;
 
 import java.time.OffsetDateTime;
 
@@ -30,8 +29,4 @@ public class User {
     @Nullable private String country;
     @Nullable private OffsetDateTime createdAt;
     @Nullable private OffsetDateTime updatedAt;
-
-    public User withId(@NotNull String id) {
-        return this.toBuilder().id(id).build();
-    }
 }

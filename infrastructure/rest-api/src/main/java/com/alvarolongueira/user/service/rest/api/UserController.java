@@ -10,9 +10,12 @@ import com.alvarolongueira.user.service.rest.api.model.CreateUserRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
+@RestController
 @AllArgsConstructor
 public class UserController implements UserApi {
 
@@ -25,6 +28,6 @@ public class UserController implements UserApi {
             throws Exception {
         CreateUserUseCase.RequestUseCase request = mapper.toCreateUserRequest(createUserRequest);
         User user = useCaseHandler.handle(createUserUseCase, request);
-        return ResponseEntity.ok(mapper.toResponse(user));
+        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toResponse(user));
     }
 }
