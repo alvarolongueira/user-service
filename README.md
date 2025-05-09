@@ -1,13 +1,8 @@
 # TODO
 
-generar eventos de kafka
-validar que no se adelantan modificaciones (version? synchronized?)
-
-get all con paginacion
-
 validar blank spaces
 validar campos nulos
-validar duplicados de mail?
+validar duplicados
 
 logs
 
@@ -15,17 +10,20 @@ test unitarios
 test integracion
 
 update postman collection
-ofuscar password https://docs.spring.io/spring-xd/docs/current/api/org/springframework/xd/dirt/rest/PasswordUtils.html
 
 jacoco-report test coverage
-crear usuario por grpc
 
 update readme
-    * open api spec
-    * liquibase y pos
-    * kafka
-    * postman
-    * docker
+* open api spec
+* liquibase y pos
+* kafka
+* postman
+* docker
+
+BONUS
+ofuscar password https://docs.spring.io/spring-xd/docs/current/api/org/springframework/xd/dirt/rest/PasswordUtils.html
+crear usuario por grpc
+
 
 -----
 ```
@@ -46,7 +44,6 @@ The service must allow you to:
 ● Add a new User
 ● Modify an existing User
 ● Remove a User
-"UK")
 ● Return a paginated list of Users, allowing for filtering by certain criteria (e.g. all Users with the country
 The service must:
 ● Provide an HTTP and/or gRPC API

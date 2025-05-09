@@ -14,10 +14,10 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class FindUserUseCaseImpl implements FindUserUseCase {
 
-    private UserDataOutputPort outputPort;
+    private UserDataOutputPort dataOutputPort;
 
     @Override
     public User process(String userId) {
-        return outputPort.findUser(userId);
+        return dataOutputPort.findUser(userId);
     }
 }

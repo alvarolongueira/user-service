@@ -15,10 +15,10 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class FindAllUsersByUseCaseImpl implements FindAllUsersByUseCase {
 
-    private UserDataOutputPort outputPort;
+    private UserDataOutputPort dataOutputPort;
 
     @Override
     public PageableUser process(UserSearchRequest request) throws Exception {
-        return outputPort.findPageableUserList(request);
+        return dataOutputPort.findPageableUserList(request);
     }
 }

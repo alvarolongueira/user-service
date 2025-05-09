@@ -1,4 +1,4 @@
-package com.alvarolongueira.user.service.rest.api;
+package com.alvarolongueira.user.service.infrastructure.rest.api;
 
 import org.springframework.boot.SpringBootConfiguration;
 

@@ -1,4 +1,4 @@
-package com.alvarolongueira.user.service.rest.api.handler;
+package com.alvarolongueira.user.service.infrastructure.rest.api.handler;
 
 import com.alvarolongueira.user.service.domain.exception.CreateUserException;
 import com.alvarolongueira.user.service.domain.exception.UpdateUserException;

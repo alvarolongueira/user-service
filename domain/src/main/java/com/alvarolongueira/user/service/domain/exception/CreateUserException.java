@@ -4,7 +4,7 @@ public class CreateUserException extends RuntimeException {
 
     private static final String MESSAGE = "Error creating user";
 
-    public CreateUserException() {
-        super(MESSAGE);
+    public CreateUserException(Throwable cause) {
+        super(MESSAGE, cause);
     }
 }

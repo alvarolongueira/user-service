@@ -29,6 +29,7 @@
         <mapstruct-lombok.version>0.2.0</mapstruct-lombok.version>
         <postgresql.version>42.7.5</postgresql.version>
         <liquibase-core.version>4.31.1</liquibase-core.version>
+        <spring-kafka.version>3.3.5</spring-kafka.version>
     </properties>
 
     <modules>

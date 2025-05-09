@@ -1,4 +1,4 @@
-package com.alvarolongueira.user.service.rest.api;
+package com.alvarolongueira.user.service.infrastructure.rest.api;
 
 import com.alvarolongueira.user.service.domain.entity.PageableUser;
 import com.alvarolongueira.user.service.domain.entity.User;
@@ -11,13 +11,14 @@ import com.alvarolongueira.user.service.domain.service.FindAllUsersByUseCase;
 import com.alvarolongueira.user.service.domain.service.FindUserUseCase;
 import com.alvarolongueira.user.service.domain.service.UpdatePatchUserUseCase;
 import com.alvarolongueira.user.service.domain.service.UpdateUserUseCase;
-import com.alvarolongueira.user.service.rest.api.handler.UseCaseHandler;
-import com.alvarolongueira.user.service.rest.api.mapper.RestApiMapper;
+import com.alvarolongueira.user.service.infrastructure.rest.api.handler.UseCaseHandler;
+import com.alvarolongueira.user.service.infrastructure.rest.api.mapper.RestApiMapper;
+import com.alvarolongueira.user.service.rest.api.UserApi;
+
 import com.alvarolongueira.user.service.rest.api.model.CreateUser201Response;
 import com.alvarolongueira.user.service.rest.api.model.CreateUserRequest;
 import com.alvarolongueira.user.service.rest.api.model.GetUsersBy200Response;
 import com.alvarolongueira.user.service.rest.api.model.UserModel;
-
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

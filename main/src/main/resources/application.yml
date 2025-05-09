@@ -25,6 +25,17 @@ spring:
     url: "jdbc:postgresql://localhost:5432/application_database"
     username: database-user
     password: database-pass
+  kafka:
+    bootstrap-servers: ${KAFKA_HOST:localhost:29092}
+    consumer:
+      group-id: kafka.user.group
+
+kafka:
+  topic:
+    user:
+      create: 'kafka_user_create'
+      update: 'kafka_user_update'
+      delete: 'kafka_user_delete'
 
 # MANAGEMENT ENDPOINTS
 management:

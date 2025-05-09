@@ -1,4 +1,4 @@
-package com.alvarolongueira.user.service.rest.api.mapper;
+package com.alvarolongueira.user.service.infrastructure.rest.api.mapper;
 
 import com.alvarolongueira.user.service.domain.entity.PageableUser;
 import com.alvarolongueira.user.service.domain.entity.User;
