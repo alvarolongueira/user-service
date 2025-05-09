@@ -14,11 +14,11 @@ import com.alvarolongueira.user.service.domain.service.UpdateUserUseCase;
 import com.alvarolongueira.user.service.infrastructure.rest.api.handler.UseCaseHandler;
 import com.alvarolongueira.user.service.infrastructure.rest.api.mapper.RestApiMapper;
 import com.alvarolongueira.user.service.rest.api.UserApi;
-
 import com.alvarolongueira.user.service.rest.api.model.CreateUser201Response;
 import com.alvarolongueira.user.service.rest.api.model.CreateUserRequest;
 import com.alvarolongueira.user.service.rest.api.model.GetUsersBy200Response;
 import com.alvarolongueira.user.service.rest.api.model.UserModel;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -75,7 +75,7 @@ public class UserController implements UserApi {
             throws Exception {
         UserModificationRequest domainRequest = mapper.toModification(userId, createUserRequest);
         User user = useCaseHandler.handle(updateUserUseCase, domainRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toGetUserResponse(user));
+        return ResponseEntity.ok(mapper.toGetUserResponse(user));
     }
 
     @Override
@@ -83,7 +83,7 @@ public class UserController implements UserApi {
             String userId, CreateUserRequest createUserRequest) throws Exception {
         UserModificationRequest domainRequest = mapper.toModification(userId, createUserRequest);
         User user = useCaseHandler.handle(updatePatchUserUseCase, domainRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toGetUserResponse(user));
+        return ResponseEntity.ok(mapper.toGetUserResponse(user));
     }
 
     @Override

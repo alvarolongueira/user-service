@@ -40,11 +40,10 @@ public class ModelFactory {
     }
 
     public static CreateUserRequest getCreateUserRequestForPatch() {
-        return new CreateUserRequest(
-                FIRST_NAME, LAST_NAME_PATCH, NICKNAME, PASSWORD, null, COUNTRY);
+        return new CreateUserRequest(FIRST_NAME, LAST_NAME_PATCH, NICKNAME, PASSWORD, EMAIL, null);
     }
 
     public static CreateUserRequest getCreateUserRequestForPut() {
-        return new CreateUserRequest(FIRST_NAME, LAST_NAME_PUT, NICKNAME, PASSWORD, null, COUNTRY);
+        return new CreateUserRequest(FIRST_NAME, LAST_NAME_PUT, NICKNAME, PASSWORD, EMAIL, null);
     }
 }

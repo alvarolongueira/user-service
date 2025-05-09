@@ -5,9 +5,6 @@ logs
 
 test unitarios
 test integracion
-
-update postman collection
-
 jacoco-report test coverage
 
 update readme
