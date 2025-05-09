@@ -22,7 +22,7 @@ spring:
   liquibase:
     enabled: true
   datasource:
-    url: "jdbc:postgresql://localhost:5432/application_database"
+    url: "jdbc:postgresql://${POSTGRESQL_HOST:localhost:5432}/application_database"
     username: database-user
     password: database-pass
   kafka:

@@ -8,7 +8,7 @@ import com.alvarolongueira.user.service.infrastructure.database.repository.entit
 import com.alvarolongueira.user.service.rest.api.model.CreateUser201Response;
 import com.alvarolongueira.user.service.rest.api.model.CreateUserRequest;
 import com.alvarolongueira.user.service.rest.api.model.UserModel;
-import com.alvarolongueira.user.service.testcontainer.PostgreTestContainer;
+import com.alvarolongueira.user.service.testcontainer.AbstractTestContainer;
 import com.alvarolongueira.user.service.utils.DatabaseUtils;
 import com.alvarolongueira.user.service.utils.KafkaConsumerUtils;
 import com.alvarolongueira.user.service.utils.ModelFactory;
@@ -20,15 +20,11 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.annotation.DirtiesContext;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext
-@EmbeddedKafka(
-        partitions = 1,
-        brokerProperties = {"listeners=PLAINTEXT://localhost:29092", "port=29092"})
-class UserIntegrationTest extends PostgreTestContainer {
+class UserIntegrationTest extends AbstractTestContainer {
 
     @LocalServerPort private int port;
     @Autowired private TestRestTemplate restTemplate;

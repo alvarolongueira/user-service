@@ -112,18 +112,11 @@
 			"item": [
 				{
 					"name": "Find Users",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
 						"url": {
-							"raw": "{{host}}/user?first_name=1&last_name=1&country=1",
+							"raw": "{{host}}/user?page=0&size=5&first_name=Alice&last_name=Bob&country=UK",
 							"host": [
 								"{{host}}"
 							],
@@ -132,16 +125,24 @@
 							],
 							"query": [
 								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								},
+								{
 									"key": "first_name",
-									"value": "1"
+									"value": "Alice"
 								},
 								{
 									"key": "last_name",
-									"value": "1"
+									"value": "Bob"
 								},
 								{
 									"key": "country",
-									"value": "1"
+									"value": "UK"
 								}
 							]
 						}
@@ -165,7 +166,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "{{id}}"
 								}
 							]
 						}
@@ -224,7 +225,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "{{id}}"
 								}
 							]
 						}
@@ -238,7 +239,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"first_name\": \"Alice\",\n    \"last_name\": \"Bob\",\n    \"nickname\": \"AB123\",\n    \"password\": \"supersecurepassword\",\n    \"email\": \"alice@bob.com\",\n    \"country\": \"UK\"\n}",
+							"raw": "{\n    \"first_name\": \"first_name\",\n    \"last_name\": \"last_name\",\n    \"country\": \"country\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -257,7 +258,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "{{id}}"
 								}
 							]
 						}
@@ -281,7 +282,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "{{id}}"
 								}
 							]
 						}
@@ -317,6 +318,11 @@
 		{
 			"key": "host",
 			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "id",
+			"value": "7d6c54ec-bbff-4b13-aac8-486a19933c01",
 			"type": "string"
 		}
 	]

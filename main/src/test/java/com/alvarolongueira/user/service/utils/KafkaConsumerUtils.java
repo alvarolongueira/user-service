@@ -91,7 +91,7 @@ public class KafkaConsumerUtils {
         return JsonUtils.toObject(json, User.class);
     }
 
-    public enum Action {
+    private enum Action {
         CREATE,
         UPDATE,
         DELETE
