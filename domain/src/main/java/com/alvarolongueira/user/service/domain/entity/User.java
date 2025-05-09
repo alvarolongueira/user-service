@@ -1,6 +1,5 @@
 package com.alvarolongueira.user.service.domain.entity;
 
-import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -9,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.With;
 
 import java.time.OffsetDateTime;
 
@@ -18,15 +18,16 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
+@With
 public class User {
 
-    @Nullable private String id;
-    @Nullable private String firstName;
-    @Nullable private String lastName;
-    private String nickname;
-    @Nullable private String password;
-    private String email;
-    @Nullable private String country;
-    @Nullable private OffsetDateTime createdAt;
-    @Nullable private OffsetDateTime updatedAt;
+    private String id;
+    private String firstName;
+    private String lastName;
+    @NotNull private String nickname;
+    private String password;
+    @NotNull private String email;
+    private String country;
+    private OffsetDateTime createdAt;
+    private OffsetDateTime updatedAt;
 }
