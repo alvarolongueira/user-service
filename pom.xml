@@ -29,7 +29,10 @@
         <mapstruct-lombok.version>0.2.0</mapstruct-lombok.version>
         <postgresql.version>42.7.5</postgresql.version>
         <liquibase-core.version>4.31.1</liquibase-core.version>
+        <postgresql-testcontainers.version>1.21.0</postgresql-testcontainers.version>
         <spring-kafka.version>3.3.5</spring-kafka.version>
+        <kafka-testcontainers.version>1.21.0</kafka-testcontainers.version>
+        <awaitility.version>4.2.0</awaitility.version>
     </properties>
 
     <modules>
@@ -116,11 +119,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
 
         <!-- Third party dependencies -->
         <dependency>
@@ -135,6 +133,11 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
+
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

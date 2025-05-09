@@ -4,8 +4,10 @@ import com.alvarolongueira.user.service.application.ports.output.UserNotifyOutpu
 import com.alvarolongueira.user.service.domain.entity.User;
 import com.alvarolongueira.user.service.domain.exception.NotifyCreateException;
 import com.alvarolongueira.user.service.infrastructure.client.kafka.client.KafkaClient;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.AllArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -14,14 +16,14 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UserNotifyOutputPortAdapter implements UserNotifyOutputPort {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper =
+            new ObjectMapper().registerModule(new JavaTimeModule());
     private KafkaClient client;
 
     @Override
     public void notifyCreate(User user) {
         try {
-            String json = objectMapper.writeValueAsString(user);
-            client.notifyCreate(json);
+            client.notifyCreate(toJson(user));
         } catch (Exception e) {
             throw new NotifyCreateException(user.getId(), e);
         }
@@ -30,8 +32,7 @@ public class UserNotifyOutputPortAdapter implements UserNotifyOutputPort {
     @Override
     public void notifyUpdate(User user) {
         try {
-            String json = objectMapper.writeValueAsString(user);
-            client.notifyUpdate(json);
+            client.notifyUpdate(toJson(user));
         } catch (Exception e) {
             throw new NotifyCreateException(user.getId(), e);
         }
@@ -40,10 +41,13 @@ public class UserNotifyOutputPortAdapter implements UserNotifyOutputPort {
     @Override
     public void notifyDelete(User user) {
         try {
-            String json = objectMapper.writeValueAsString(user);
-            client.notifyDelete(json);
+            client.notifyDelete(toJson(user));
         } catch (Exception e) {
             throw new NotifyCreateException(user.getId(), e);
         }
+    }
+
+    private String toJson(User user) throws JsonProcessingException {
+        return objectMapper.writeValueAsString(user);
     }
 }

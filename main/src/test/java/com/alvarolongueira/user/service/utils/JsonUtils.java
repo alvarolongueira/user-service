@@ -1,4 +1,4 @@
-package com.alvarolongueira.user.service.infrastructure.rest.api.utils;
+package com.alvarolongueira.user.service.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -22,10 +22,6 @@ public class JsonUtils {
                     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                     .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
-    /**
-     * Method responsible to convert an object into String. This method is useful to create a json
-     * from object to use as stubs when is necessary use wiremock.
-     */
     public String toJson(Object object) {
         try {
             return objectMapper.writeValueAsString(object);
@@ -35,7 +31,6 @@ public class JsonUtils {
         }
     }
 
-    /** Method responsible to convert json into Object. All parameters are required */
     public <T> T toObject(String json, Class<T> clazz) {
         try {
             return objectMapper.readValue(json, clazz);

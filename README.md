@@ -1,8 +1,5 @@
-# TODO
 
-validar blank spaces
-validar campos nulos
-validar duplicados
+# TODO
 
 logs
 
@@ -19,13 +16,18 @@ update readme
 * kafka
 * postman
 * docker
+* Please also provide a README.md that contains:
+  ● Instructions to start the application on localhost (dockerised applications are preferred)
+  ● An explanation of the choices taken and assumptions made during development
+  ● Possible extensions or improvements to the service (focusing on scalability and deployment to production)
+  We expect to be able to run the tests, build the application and run it locally.
+* pendiente validar duplicados o que campos son obligatorios
 
 BONUS
 ofuscar password https://docs.spring.io/spring-xd/docs/current/api/org/springframework/xd/dirt/rest/PasswordUtils.html
 crear usuario por grpc
 
 
------
 ```
 {
 "id":"d2a7924e-765f-4949-bc4c-219c956d0f8b",
@@ -39,23 +41,3 @@ crear usuario por grpc
 "updated_at": "2019-10-12T07:20:50.52Z"
 }
 ```
-
-The service must allow you to:
-● Add a new User
-● Modify an existing User
-● Remove a User
-● Return a paginated list of Users, allowing for filtering by certain criteria (e.g. all Users with the country
-The service must:
-● Provide an HTTP and/or gRPC API
-● Use a sensible storage mechanism for the Users
-● Have the ability to notify other interested services of changes to User entities
-● Have meaningful logs
-● Have a health check
-● Be well documented
-
---
-Please also provide a README.md that contains:
-● Instructions to start the application on localhost (dockerised applications are preferred)
-● An explanation of the choices taken and assumptions made during development
-● Possible extensions or improvements to the service (focusing on scalability and deployment to production)
-We expect to be able to run the tests, build the application and run it locally.

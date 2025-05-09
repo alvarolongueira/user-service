@@ -7,16 +7,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaClient {
 
-    @Value("${kafka.topic.user.create}")
-    private String topicUserCreate;
+    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final String topicUserCreate;
+    private final String topicUserUpdate;
+    private final String topicUserDelete;
 
-    @Value("${kafka.topic.user.update}")
-    private String topicUserUpdate;
-
-    @Value("${kafka.topic.user.delete}")
-    private String topicUserDelete;
-
-    private KafkaTemplate<String, String> kafkaTemplate;
+    public KafkaClient(
+            @Value("${kafka.topic.user.create}") String topicUserCreate,
+            @Value("${kafka.topic.user.update}") String topicUserUpdate,
+            @Value("${kafka.topic.user.delete}") String topicUserDelete,
+            KafkaTemplate<String, String> kafkaTemplate) {
+        this.topicUserCreate = topicUserCreate;
+        this.topicUserUpdate = topicUserUpdate;
+        this.topicUserDelete = topicUserDelete;
+        this.kafkaTemplate = kafkaTemplate;
+    }
 
     public void notifyCreate(String json) {
         kafkaTemplate.send(topicUserCreate, json);
