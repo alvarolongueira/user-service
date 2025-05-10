@@ -18,7 +18,7 @@ public class FindAllUsersByUseCaseImpl implements FindAllUsersByUseCase {
     private UserDataOutputPort dataOutputPort;
 
     @Override
-    public PageableUser process(UserSearchRequest request) throws Exception {
+    public PageableUser process(UserSearchRequest request) {
         return dataOutputPort.findPageableUserList(request);
     }
 }

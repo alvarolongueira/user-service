@@ -13,6 +13,4 @@ public interface UserMapper {
     User toUser(UserCreationRequest request);
 
     User toUser(UserModificationRequest request);
-
-    User toUser(UserModificationRequest request, @MappingTarget User user);
 }

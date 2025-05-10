@@ -5,8 +5,8 @@ import com.alvarolongueira.user.service.application.ports.output.UserDataOutputP
 import com.alvarolongueira.user.service.application.ports.output.UserNotifyOutputPort;
 import com.alvarolongueira.user.service.domain.entity.User;
 import com.alvarolongueira.user.service.domain.entity.UserModificationRequest;
-import com.alvarolongueira.user.service.domain.exception.CreateUserException;
 import com.alvarolongueira.user.service.domain.exception.NotifyCreateException;
+import com.alvarolongueira.user.service.domain.exception.UpdateUserException;
 import com.alvarolongueira.user.service.domain.exception.UserNotFoundException;
 import com.alvarolongueira.user.service.domain.service.UpdatePatchUserUseCase;
 
@@ -38,7 +38,7 @@ public class UpdatePatchUserUseCaseImpl implements UpdatePatchUserUseCase {
         } catch (UserNotFoundException e) {
             throw e;
         } catch (Exception e) {
-            throw new CreateUserException(e);
+            throw new UpdateUserException(request.id(), e);
         }
     }
 
