@@ -5,11 +5,13 @@ import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.alvarolongueira.user.service.domain.entity.User;
 import com.alvarolongueira.user.service.infrastructure.database.repository.entity.UserEntity;
 import com.alvarolongueira.user.service.rest.api.model.CreateUser201Response;
 import com.alvarolongueira.user.service.rest.api.model.CreateUserRequest;
+import com.alvarolongueira.user.service.rest.api.model.GetUsersBy200Response;
 import com.alvarolongueira.user.service.rest.api.model.UserModel;
 import com.alvarolongueira.user.service.testcontainer.AbstractTestContainer;
 import com.alvarolongueira.user.service.utils.DatabaseUtils;
@@ -18,6 +20,7 @@ import com.alvarolongueira.user.service.utils.ModelFactory;
 
 import io.restassured.http.ContentType;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,17 +35,13 @@ class UserIntegrationTest extends AbstractTestContainer {
     @Autowired private DatabaseUtils databaseUtils;
 
     @Test()
-    void allApisWorkAsExpected() throws InterruptedException {
+    void allApisWorkAsExpected() {
         String userId = validatePOST();
         validateGET(userId);
+        validateGETBY(userId);
         validatePATCH(userId);
         validatePUT(userId);
-        validateGETBY(userId);
         validateDELETE(userId);
-    }
-
-    private void validateGET(String userId) {
-        // TODO
     }
 
     private String validatePOST() {
@@ -70,6 +69,54 @@ class UserIntegrationTest extends AbstractTestContainer {
         kafkaConsumerUtils.validateIsEmpty();
 
         return user.getId();
+    }
+
+    private void validateGET(String userId) {
+        UserModel response =
+                given().contentType(ContentType.JSON)
+                        .when()
+                        .get(getUserWithIdPath(userId))
+                        .then()
+                        .statusCode(HttpStatus.OK.value())
+                        .extract()
+                        .response()
+                        .as(UserModel.class);
+
+        assertNotNull(response);
+        assertEquals(ModelFactory.LAST_NAME, response.getLastName());
+        assertEquals(ModelFactory.COUNTRY, response.getCountry());
+
+        UserEntity entity = databaseUtils.find(userId);
+        assertEquals(ModelFactory.LAST_NAME, entity.getLastName());
+        assertEquals(ModelFactory.COUNTRY, entity.getCountry());
+    }
+
+    private void validateGETBY(String userId) {
+        String path = USER_PATH + "?page=0&size=5&first_name=" + ModelFactory.FIRST_NAME;
+        GetUsersBy200Response response =
+                given().contentType(ContentType.JSON)
+                        .when()
+                        .get(path)
+                        .then()
+                        .statusCode(HttpStatus.OK.value())
+                        .extract()
+                        .response()
+                        .as(GetUsersBy200Response.class);
+
+        assertNotNull(response);
+        assertEquals(0, response.getPageNumber());
+        assertEquals(5, response.getSize());
+        assertEquals(1, response.getTotalElements());
+        assertEquals(1, response.getTotalPages());
+
+        assertTrue(CollectionUtils.isNotEmpty(response.getContent()));
+        UserModel user = response.getContent().get(0);
+        assertEquals(ModelFactory.LAST_NAME, user.getLastName());
+        assertEquals(ModelFactory.COUNTRY, user.getCountry());
+
+        UserEntity entity = databaseUtils.find(userId);
+        assertEquals(ModelFactory.LAST_NAME, entity.getLastName());
+        assertEquals(ModelFactory.COUNTRY, entity.getCountry());
     }
 
     private void validatePATCH(String userId) {
@@ -127,11 +174,19 @@ class UserIntegrationTest extends AbstractTestContainer {
         kafkaConsumerUtils.validateIsEmpty();
     }
 
-    private void validateGETBY(String userId) {
-        // TODO
-    }
-
     private void validateDELETE(String userId) {
-        // TODO
+        CreateUserRequest request = ModelFactory.getCreateUserRequestForPut();
+        given().contentType(ContentType.JSON)
+                .body(request)
+                .when()
+                .delete(getUserWithIdPath(userId))
+                .then()
+                .statusCode(HttpStatus.OK.value());
+
+        User user = ModelFactory.getUser(userId);
+        databaseUtils.noExists(userId);
+
+        kafkaConsumerUtils.validateMessageDelete(user);
+        kafkaConsumerUtils.validateIsEmpty();
     }
 }

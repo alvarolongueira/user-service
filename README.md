@@ -9,9 +9,10 @@ jacoco-report test coverage
 
 update readme
 * open api spec
-* liquibase y pos
+* liquibase y posgres
 * kafka
 * postman
+* jacoco
 * docker
 * Please also provide a README.md that contains:
   ● Instructions to start the application on localhost (dockerised applications are preferred)
