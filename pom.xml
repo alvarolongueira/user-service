@@ -33,6 +33,9 @@
         <spring-kafka.version>3.3.5</spring-kafka.version>
         <kafka-testcontainers.version>1.21.0</kafka-testcontainers.version>
         <awaitility.version>4.2.0</awaitility.version>
+        <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
+        <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
     </properties>
 
     <modules>
@@ -44,6 +47,7 @@
         <module>infrastructure/rest-api</module>
         <module>infrastructure/client-kafka</module>
         <module>main</module>
+        <module>report</module>
     </modules>
 
     <dependencyManagement>
@@ -180,6 +184,18 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
