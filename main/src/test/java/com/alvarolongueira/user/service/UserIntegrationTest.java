@@ -9,13 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.alvarolongueira.user.service.domain.entity.User;
 import com.alvarolongueira.user.service.infrastructure.database.repository.entity.UserEntity;
+import com.alvarolongueira.user.service.kafka.KafkaConsumerUtils;
 import com.alvarolongueira.user.service.rest.api.model.CreateUser201Response;
 import com.alvarolongueira.user.service.rest.api.model.CreateUserRequest;
 import com.alvarolongueira.user.service.rest.api.model.GetUsersBy200Response;
 import com.alvarolongueira.user.service.rest.api.model.UserModel;
 import com.alvarolongueira.user.service.testcontainer.AbstractTestContainer;
 import com.alvarolongueira.user.service.utils.DatabaseUtils;
-import com.alvarolongueira.user.service.utils.KafkaConsumerUtils;
 import com.alvarolongueira.user.service.utils.ModelFactory;
 
 import io.restassured.http.ContentType;
