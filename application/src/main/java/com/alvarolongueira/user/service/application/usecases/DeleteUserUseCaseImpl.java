@@ -31,7 +31,7 @@ public class DeleteUserUseCaseImpl implements DeleteUserUseCase {
         try {
             notifyOutputPort.notifyDelete(user);
         } catch (NotifyCreateException e) {
-            log.error("Error sending notification for creation of user", e);
+            log.error("Error sending notification for delete user {}", user);
         }
     }
 }

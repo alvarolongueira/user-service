@@ -35,6 +35,7 @@ public class CreateUserUseCaseImpl implements CreateUserUseCase {
             User user = mapper.toUser(request);
             return dataOutputPort.createUser(user);
         } catch (Exception e) {
+            log.error(e.getMessage(), e);
             throw new CreateUserException(e);
         }
     }
@@ -43,7 +44,7 @@ public class CreateUserUseCaseImpl implements CreateUserUseCase {
         try {
             notifyOutputPort.notifyCreate(user);
         } catch (NotifyCreateException e) {
-            log.error("Error sending notification for creation of user", e);
+            log.error("Error sending notification for creation user {}", user);
         }
     }
 }

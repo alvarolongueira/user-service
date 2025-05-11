@@ -12,6 +12,7 @@ import com.alvarolongueira.user.service.infrastructure.database.repository.entit
 import jakarta.transaction.Transactional;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 @Transactional
 @AllArgsConstructor
 public class UserDataOutputPortAdapter implements UserDataOutputPort {
@@ -29,6 +31,7 @@ public class UserDataOutputPortAdapter implements UserDataOutputPort {
 
     @Override
     public PageableUser findPageableUserList(UserSearchRequest request) {
+        log.info("Searching users with request {}", request);
         Pageable pageable = PageRequest.of(request.page(), request.size());
         UserEntity exampleEntity = new UserEntity();
         exampleEntity.setFirstName(request.firstName());
@@ -42,18 +45,21 @@ public class UserDataOutputPortAdapter implements UserDataOutputPort {
 
     @Override
     public User findUser(String userId) {
+        log.info("Searching user with id {}", userId);
         UserEntity entity = findUserEntity(userId);
         return mapper.toUser(entity);
     }
 
     @Override
     public User createUser(User user) {
+        log.info("Creating new user {}", user);
         UserEntity entity = repository.save(mapper.toUserEntity(user));
         return mapper.toUser(entity);
     }
 
     @Override
     public User updateUser(User user) {
+        log.info("Updating user {}", user);
         UserEntity oldEntity = findUserEntity(user.getId());
         UserEntity newEntity = mapper.toUserEntityUpdate(user, oldEntity);
         UserEntity savedEntity = this.repository.save(newEntity);
@@ -62,6 +68,7 @@ public class UserDataOutputPortAdapter implements UserDataOutputPort {
 
     @Override
     public User updatePatchUser(User user) {
+        log.info("Updating patch user {}", user);
         UserEntity oldEntity = findUserEntity(user.getId());
         UserEntity newEntity = mapper.toUserEntityPatch(user, oldEntity);
         this.repository.save(newEntity);
@@ -70,6 +77,7 @@ public class UserDataOutputPortAdapter implements UserDataOutputPort {
 
     @Override
     public void delete(String userId) {
+        log.info("Deleting user {}", userId);
         repository.deleteById(userId);
     }
 

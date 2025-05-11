@@ -36,8 +36,10 @@ public class UpdatePatchUserUseCaseImpl implements UpdatePatchUserUseCase {
             User user = mapper.toUser(request);
             return dataOutputPort.updatePatchUser(user);
         } catch (UserNotFoundException e) {
+            log.error(e.getMessage(), e);
             throw e;
         } catch (Exception e) {
+            log.error(e.getMessage(), e);
             throw new UpdateUserException(request.id(), e);
         }
     }
@@ -46,7 +48,7 @@ public class UpdatePatchUserUseCaseImpl implements UpdatePatchUserUseCase {
         try {
             notifyOutputPort.notifyUpdate(user);
         } catch (NotifyCreateException e) {
-            log.error("Error sending notification for creation of user", e);
+            log.error("Error sending notification for patch update user {}", user);
         }
     }
 }

@@ -44,6 +44,13 @@ public class UserController implements UserApi {
     public ResponseEntity<GetUsersBy200Response> getUsersBy(
             Integer page, Integer size, String firstName, String lastName, String country)
             throws Exception {
+        log.info(
+                "Received request to get Users By: page {}, size {} firstName {}, lastName {}, country {}",
+                page,
+                size,
+                firstName,
+                lastName,
+                country);
         UserSearchRequest domainRequest =
                 UserSearchRequest.builder()
                         .page(page)
@@ -58,6 +65,7 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<UserModel> getUserById(String userId) throws Exception {
+        log.info("Received request to get user by id {}", userId);
         User user = useCaseHandler.handle(findUserUseCase, userId);
         return ResponseEntity.ok(mapper.toGetUserResponse(user));
     }
@@ -65,6 +73,7 @@ public class UserController implements UserApi {
     @Override
     public ResponseEntity<CreateUser201Response> createUser(CreateUserRequest createUserRequest)
             throws Exception {
+        log.info("Received request to create user {}", createUserRequest);
         UserCreationRequest domainRequest = mapper.toCreation(createUserRequest);
         User user = useCaseHandler.handle(createUserUseCase, domainRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toCreateUserResponse(user));
@@ -73,6 +82,7 @@ public class UserController implements UserApi {
     @Override
     public ResponseEntity<UserModel> updateUser(String userId, CreateUserRequest createUserRequest)
             throws Exception {
+        log.info("Received request to update user {} with request {}", userId, createUserRequest);
         UserModificationRequest domainRequest = mapper.toModification(userId, createUserRequest);
         User user = useCaseHandler.handle(updateUserUseCase, domainRequest);
         return ResponseEntity.ok(mapper.toGetUserResponse(user));
@@ -81,6 +91,10 @@ public class UserController implements UserApi {
     @Override
     public ResponseEntity<UserModel> updatePatchUser(
             String userId, CreateUserRequest createUserRequest) throws Exception {
+        log.info(
+                "Received request to update patch user {} with request {}",
+                userId,
+                createUserRequest);
         UserModificationRequest domainRequest = mapper.toModification(userId, createUserRequest);
         User user = useCaseHandler.handle(updatePatchUserUseCase, domainRequest);
         return ResponseEntity.ok(mapper.toGetUserResponse(user));
@@ -88,6 +102,7 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<Void> deleteUser(String userId) throws Exception {
+        log.info("Received request to delete user {}", userId);
         useCaseHandler.handle(deleteUserUseCase, userId);
         return ResponseEntity.ok(null);
     }

@@ -11,10 +11,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 @AllArgsConstructor
 public class UserNotifyOutputPortAdapter implements UserNotifyOutputPort {
 
@@ -27,6 +29,7 @@ public class UserNotifyOutputPortAdapter implements UserNotifyOutputPort {
         try {
             client.notifyCreate(toJson(user));
         } catch (Exception e) {
+            log.error(e.getMessage(), e);
             throw new NotifyCreateException(user.getId(), e);
         }
     }
@@ -36,6 +39,7 @@ public class UserNotifyOutputPortAdapter implements UserNotifyOutputPort {
         try {
             client.notifyUpdate(toJson(user));
         } catch (Exception e) {
+            log.error(e.getMessage(), e);
             throw new NotifyUpdateException(user.getId(), e);
         }
     }
@@ -45,6 +49,7 @@ public class UserNotifyOutputPortAdapter implements UserNotifyOutputPort {
         try {
             client.notifyDelete(toJson(user));
         } catch (Exception e) {
+            log.error(e.getMessage(), e);
             throw new NotifyDeleteException(user.getId(), e);
         }
     }
