@@ -19,7 +19,7 @@
   * [TODO: Things to do with more time](#todo-things-to-do-with-more-time)
     * [bugfix](#bugfix)
     * [features](#features)
-  * [Who: Alvaro Longueira](#who-alvaro-longueira)
+  * [Author: Alvaro Longueira](#author-alvaro-longueira)
 <!-- TOC -->
 
 ## Purpose of the application
@@ -121,7 +121,7 @@ Things that would be nice to have done having more time:
 * Hide password information field in all the application.
 * Implement grpc as requested in the challenge (although it was optional).
 
-## Who: Alvaro Longueira
+## Author: Alvaro Longueira
 * **Alvaro Longueira** - [GitHub](https://github.com/alvarolongueira)
 
 
