@@ -1,11 +1,13 @@
-# user-service
+# User Service
 
 <!-- TOC -->
-* [user-service](#user-service)
-  * [Why: Purpose of the application](#why-purpose-of-the-application)
-  * [How: How to run it and utilities](#how-how-to-run-it-and-utilities)
+* [User Service](#user-service)
+  * [Purpose of the application](#purpose-of-the-application)
+  * [How to run it and utilities](#how-to-run-it-and-utilities)
     * [Running application locally](#running-application-locally)
-  * [What: Features and technologies in place](#what-features-and-technologies-in-place)
+    * [Postman](#postman)
+    * [Kafka UI](#kafka-ui)
+  * [Features and technologies in place](#features-and-technologies-in-place)
     * [Summary of tools and technologies](#summary-of-tools-and-technologies)
     * [API](#api-)
     * [Hexagonal Architecture](#hexagonal-architecture)
@@ -13,9 +15,6 @@
     * [Kafka](#kafka)
     * [Docker](#docker)
     * [Tests](#tests)
-  * [Where: Things of interest](#where-things-of-interest)
-    * [Kafka UI](#kafka-ui)
-    * [Postman](#postman)
     * [Jacoco Reports](#jacoco-reports)
   * [TODO: Things to do with more time](#todo-things-to-do-with-more-time)
     * [bugfix](#bugfix)
@@ -23,13 +22,12 @@
   * [Who: Alvaro Longueira](#who-alvaro-longueira)
 <!-- TOC -->
 
-## Why: Purpose of the application
+## Purpose of the application
 Application that provide a CRUD to manage Users. 
 
 This has been done using SOLID principles and Hexagonal Architecture
 
-## How: How to run it and utilities
-This is a multimodule java application. There are two ways to run it
+## How to run it and utilities
 
 ### Running application locally
 1) There are two ways of start the application:
@@ -51,9 +49,14 @@ This is a multimodule java application. There are two ways to run it
 docker compose up
 ````
 
-3) There is a postman collection in folder `/postman` to try any endpoint
+### Postman
+There is a folder `postman` with a collection that can be used to call all the `health` endpoints and `user crud` endpoints
 
-## What: Features and technologies in place
+### Kafka UI
+Docker compose provides an UI to monitor kafka http://localhost:9081/
+
+
+## Features and technologies in place
 ### Summary of tools and technologies
 * API first
 * Open API
@@ -97,14 +100,6 @@ There is an integration test with the happy path for all the endpoints [UserInte
 It has been used testcontainers so there is no need of real connections to test it.
 
 Also, there are some basic unit tests in module `application`(*For more information see )
-
-## Where: Things of interest
-
-### Kafka UI
-Docker compose provides an UI to monitor kafka http://localhost:9081/
-
-### Postman
-There is a folder `postman` with a collection postman that can be used to call all the `health` endpoints and `user crud` endpoints
 
 ### Jacoco Reports
 Jacoco reports are generated inside the module `report`
