@@ -1,0 +1,288 @@
+openapi: 3.0.0
+info:
+  title: User API
+  version: 1.0.0
+  description: Api to handle Users
+  contact:
+    url: 'https://www.linkedin.com/in/alvarolongueira/'
+    name: Alvaro Longueira
+servers:
+  - url: 'https://localhost:8080'
+tags:
+  - name: user
+    description: Api to handle Users
+paths:
+  /user:
+    get:
+      tags:
+        - user
+      summary: Find Users
+      description: Find Users
+      operationId: getUsersBy
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+          required: true
+          description: Page index
+        - schema:
+            type: integer
+          in: query
+          required: true
+          description: Page size
+          name: size
+        - name: first_name
+          description: First name of the user
+          in: query
+          schema:
+            type: string
+          example: james
+        - name: last_name
+          description: Last name of the user
+          in: query
+          schema:
+            type: string
+          example: jameson
+        - name: country
+          description: Country of the user
+          in: query
+          schema:
+            type: string
+          example: uk
+      responses:
+        '200':
+          $ref: '#/components/responses/UserPaginationResponse'
+    post:
+      tags:
+        - user
+      summary: Create User
+      description: Create User
+      operationId: createUser
+      requestBody:
+        $ref: '#/components/requestBodies/UserRequest'
+      responses:
+        '201':
+          description: Unique identifier of the user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+              examples:
+                Example 1:
+                  value:
+                    id: b11cfa25-530d-44a2-b40e-43b5321310b5
+        '400':
+          description: Bad Request
+  '/user/{userId}':
+    get:
+      tags:
+        - user
+      summary: Get User
+      description: Get User
+      operationId: getUserById
+      responses:
+        '200':
+          $ref: '#/components/responses/UserResponse'
+        '404':
+          description: Not Found
+      x-stoplight:
+        id: 2kaqdnsfs6ihm
+    put:
+      tags:
+        - user
+      summary: Modify user
+      description: Modify user
+      operationId: updateUser
+      requestBody:
+        $ref: '#/components/requestBodies/UserRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserResponse'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+      x-stoplight:
+        id: 4bzdex9jolfcl
+    patch:
+      tags:
+        - user
+      summary: Modify user
+      description: Modify user
+      operationId: updatePatchUser
+      requestBody:
+        $ref: '#/components/requestBodies/UserRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserResponse'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+      x-stoplight:
+        id: l7yn9zjptqyg1
+    delete:
+      tags:
+        - user
+      summary: Delete user
+      description: Delete user
+      operationId: deleteUser
+      responses:
+        '200':
+          description: Deletion successfull
+        '404':
+          description: Not Found
+      x-stoplight:
+        id: 6tpbsipr095ih
+    parameters:
+      - schema:
+          type: string
+          minLength: 1
+          example: d2a7924e-765f-4949-bc4c-219c956d0f8b
+        name: userId
+        in: path
+        required: true
+        description: Unique identifier of the user
+components:
+  requestBodies:
+    UserRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - nickname
+              - email
+            properties:
+              first_name:
+                type: string
+                description: First name of the user
+              last_name:
+                type: string
+                description: Last name of the user
+              nickname:
+                type: string
+                description: Nickname of the user
+              password:
+                type: string
+                description: Password of the user
+              email:
+                type: string
+                description: Email of the user
+              country:
+                type: string
+                description: Country of the user
+          examples:
+            Example 1:
+              value:
+                first_name: Alice
+                last_name: Bob
+                nickname: AB123
+                password: supersecurepassword
+                email: alice@bob.com
+                country: UK
+      description: Request to create or update an user
+  responses:
+    UserResponse:
+      description: User information
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserModel'
+          examples:
+            Example 1:
+              value:
+                id: d2a7924e-765f-4949-bc4c-219c956d0f8b
+                first_name: Alice
+                last_name: Bob
+                nickname: AB123
+                password: supersecurepassword
+                email: alice@bob.com
+                country: UK
+                created_at: '2019-10-12T07:20:50.52Z'
+                updated_at: '2019-10-12T07:20:50.52Z'
+    UserPaginationResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              content:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserModel'
+              pageNumber:
+                type: integer
+              size:
+                type: integer
+              totalPages:
+                type: integer
+              totalElements:
+                type: integer
+          examples:
+            Example 1:
+              value:
+                content:
+                  - id: d2a7924e-765f-4949-bc4c-219c956d0f8b
+                    first_name: Alice
+                    last_name: Bob
+                    nickname: AB123
+                    password: supersecurepassword
+                    email: alice@bob.com
+                    country: UK
+                    created_at: '2019-10-12T07:20:50.52Z'
+                    updated_at: '2019-10-12T07:20:50.52Z'
+                pageNumber: 0
+                size: 5
+                totalPages: 1
+                totalElements: 1
+  schemas:
+    UserModel:
+      description: Representation of an user
+      x-stoplight:
+        id: bb102c0221204
+      type: object
+      x-examples:
+        Example 1:
+          id: d2a7924e-765f-4949-bc4c-219c956d0f8b
+          first_name: Alice
+          last_name: Bob
+          nickname: AB123
+          password: supersecurepassword
+          email: alice@bob.com
+          country: UK
+          created_at: '2019-10-12T07:20:50.52Z'
+          updated_at: '2019-10-12T07:20:50.52Z'
+      required:
+        - id
+        - nickname
+        - email
+        - created_at
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        nickname:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        country:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string

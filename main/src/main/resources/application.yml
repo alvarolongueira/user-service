@@ -1,0 +1,70 @@
+server:
+  port: ${APP_SERVER_PORT:8080}
+  shutdown: graceful
+  error:
+    include-message: always
+
+# SPRING CONFIG
+spring:
+  application:
+    name: user-service
+    version: '@project.version@'
+  profiles:
+    active: ${APP_ACTIVE_PROFILE:dev}
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    default-property-inclusion: non_null
+  sql:
+    init:
+      mode: always
+  jpa:
+    show-sql: false
+  liquibase:
+    enabled: true
+  datasource:
+    url: "jdbc:postgresql://${POSTGRESQL_HOST:localhost:5432}/application_database"
+    username: database-user
+    password: database-pass
+  kafka:
+    bootstrap-servers: ${KAFKA_HOST:localhost:29092}
+
+kafka:
+  topic:
+    user:
+      create: 'kafka_user_create'
+      update: 'kafka_user_update'
+      delete: 'kafka_user_delete'
+
+# MANAGEMENT ENDPOINTS
+management:
+  security:
+    enabled: false
+  context-path: /
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+      base-path: /
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+      show-components: always
+  health:
+    binders:
+      enabled: true
+    db:
+      enabled: true
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true
+
+# OPENAPI GENERATION
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
